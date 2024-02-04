@@ -1,14 +1,16 @@
 const APIURL="https://api.github.com/users/";
 const main=document.querySelector("#main");
-const getUser=async(username)=>{
+const getUser=async(username)=>
+{
     const response=await fetch(APIURL+username);
     console.log(response);
     const data= await response.json();
     console.log(data);
-
+    console.log(data.avatar_url)
     const card=`
       <div class="card">
             <div><img src="${data.avatar_url}" alt="img" class="avatar"></div>
+        
         </div>
         <div class="user-info">
             <h2>${data.name}</h2>
@@ -23,7 +25,12 @@ const getUser=async(username)=>{
     `
     main.innerHTML=card;
     getRepos(username)
+
+
+   document.documentElement.style.setProperty('--avatar-url',`url(${data.avatar_url})`)
 }
+
+
 
 // getUser("udc29h")
 
